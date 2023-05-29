@@ -8,12 +8,14 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-async function getCompletion() {
+async function getCompletion(prompt) {
   const completion = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
-    messages: [{role: "user", content: "Hello world"}],
+    messages: [{role: "user", content: prompt}],
   });
   console.log(completion.data.choices[0].message);
 }
 
-getCompletion()
+const prompt = 'Generate a list of three made-up portuguese book titles along with their \
+authors and genres. Provide them in JSON format with the following keys? book_id, title, author, genre.'
+getCompletion(prompt)
